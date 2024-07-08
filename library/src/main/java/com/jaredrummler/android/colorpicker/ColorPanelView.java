@@ -202,8 +202,8 @@ public class ColorPanelView extends View {
     int right = dRect.right - borderWidthPx;
     colorRect = new Rect(left, top, right, bottom);
     alphaPattern = new AlphaPatternDrawable(DrawingUtils.dpToPx(getContext(), 4));
-    alphaPattern.setBounds(Math.round(colorRect.left), Math.round(colorRect.top), Math.round(colorRect.right),
-        Math.round(colorRect.bottom));
+    alphaPattern.setBounds(colorRect.left, colorRect.top, colorRect.right,
+        colorRect.bottom);
   }
 
   /**
