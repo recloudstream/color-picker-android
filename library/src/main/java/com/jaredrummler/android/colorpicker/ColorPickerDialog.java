@@ -190,12 +190,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity()).setView(rootView)
-                .setPositiveButton(selectedButtonStringRes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        onColorSelected(color);
-                    }
-                });
+                .setPositiveButton(selectedButtonStringRes, (dialog, which) -> onColorSelected(color));
 
         int dialogTitleStringRes = getArguments().getInt(ARG_DIALOG_TITLE);
         if (dialogTitleStringRes != 0) {
