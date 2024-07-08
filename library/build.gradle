@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+  namespace 'com.jaredrummler.android.colorpicker'
   compileSdkVersion buildConfig.compileSdk
   resourcePrefix "cpv_"
   defaultConfig {

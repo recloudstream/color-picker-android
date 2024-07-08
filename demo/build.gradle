@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+  namespace 'com.jaredrummler.android.colorpicker.demo'
   compileSdkVersion buildConfig.compileSdk
   defaultConfig {
     applicationId "com.jaredrummler.android.colorpicker.demo"
