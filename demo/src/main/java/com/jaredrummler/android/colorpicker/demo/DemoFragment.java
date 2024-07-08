@@ -18,14 +18,12 @@ public class DemoFragment extends PreferenceFragmentCompat {
 
     // Example showing how we can get the new color when it is changed:
     ColorPreferenceCompat colorPreference = findPreference(KEY_DEFAULT_COLOR);
-    colorPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-      @Override public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (KEY_DEFAULT_COLOR.equals(preference.getKey())) {
-          String newDefaultColor = Integer.toHexString((int) newValue);
-          Log.d(TAG, "New default color is: #" + newDefaultColor);
-        }
-        return true;
+    colorPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+      if (KEY_DEFAULT_COLOR.equals(preference.getKey())) {
+        String newDefaultColor = Integer.toHexString((int) newValue);
+        Log.d(TAG, "New default color is: #" + newDefaultColor);
       }
+      return true;
     });
   }
 }
