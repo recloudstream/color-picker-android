@@ -42,9 +42,9 @@ public class ColorPickerActivity extends AppCompatActivity implements OnColorCha
     SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
     int initialColor = prefs.getInt("color_3", 0xFF000000);
 
-    colorPickerView = (ColorPickerView) findViewById(R.id.cpv_color_picker_view);
-    ColorPanelView colorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_old);
-    newColorPanelView = (ColorPanelView) findViewById(R.id.cpv_color_panel_new);
+    colorPickerView = (ColorPickerView) findViewById(com.jaredrummler.android.colorpicker.R.id.cpv_color_picker_view);
+    ColorPanelView colorPanelView = (ColorPanelView) findViewById(com.jaredrummler.android.colorpicker.R.id.cpv_color_panel_old);
+    newColorPanelView = (ColorPanelView) findViewById(com.jaredrummler.android.colorpicker.R.id.cpv_color_panel_new);
 
     Button btnOK = (Button) findViewById(R.id.okButton);
     Button btnCancel = (Button) findViewById(R.id.cancelButton);
