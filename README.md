@@ -69,10 +69,24 @@ For further documentation about how to use the library, check the [demo](demo) a
 
 ## Download
 
-Download [the latest AAR](https://repo1.maven.org/maven2/com/jaredrummler/colorpicker/1.1.0/colorpicker-1.1.0.aar) or grab via Gradle:
+1. Add JitPack to top level 'build.gradle' file
+```
+allprojects {
+    repositories {
+        ...
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
 
-```groovy
-implementation 'com.jaredrummler:colorpicker:1.1.0'
+2. App dependency to module 'build.gradle'
+```
+dependencies {
+    ...
+    ....
+    implementation 'com.github.sagishporer:ColorPicker:1.1.0'
+}
 ```
 
 ## License
