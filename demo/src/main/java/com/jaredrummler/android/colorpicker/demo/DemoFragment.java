@@ -17,7 +17,7 @@ public class DemoFragment extends PreferenceFragmentCompat {
     setPreferencesFromResource(R.xml.main, rootKey);
 
     // Example showing how we can get the new color when it is changed:
-    ColorPreferenceCompat colorPreference = (ColorPreferenceCompat) findPreference(KEY_DEFAULT_COLOR);
+    ColorPreferenceCompat colorPreference = findPreference(KEY_DEFAULT_COLOR);
     colorPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
       @Override public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (KEY_DEFAULT_COLOR.equals(preference.getKey())) {
