@@ -17,4 +17,4 @@ dependencies {
   implementation deps.androidx.preferences
 }
 
-apply from: rootProject.file('gradle/maven-push.gradle')
+// apply from: rootProject.file('gradle/maven-push.gradle')
