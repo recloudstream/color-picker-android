@@ -522,9 +522,7 @@ public class ColorPickerView extends View {
             y = y - rect.top;
         }
 
-        float hue = 360f - (y * 360f / height);
-
-        return hue;
+        return 360f - (y * 360f / height);
     }
 
     private int pointToAlpha(int x) {
