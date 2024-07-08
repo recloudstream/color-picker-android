@@ -440,10 +440,10 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
 
     View createPresetsView() {
         View contentView = View.inflate(getActivity(), R.layout.cpv_dialog_presets, null);
-        shadesLayout = (LinearLayout) contentView.findViewById(R.id.shades_layout);
-        transparencySeekBar = (SeekBar) contentView.findViewById(R.id.transparency_seekbar);
-        transparencyPercText = (TextView) contentView.findViewById(R.id.transparency_text);
-        GridView gridView = (GridView) contentView.findViewById(R.id.gridView);
+        shadesLayout = contentView.findViewById(R.id.shades_layout);
+        transparencySeekBar = contentView.findViewById(R.id.transparency_seekbar);
+        transparencyPercText = contentView.findViewById(R.id.transparency_text);
+        GridView gridView = contentView.findViewById(R.id.gridView);
 
         loadPresets();
 
@@ -516,8 +516,8 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         if (shadesLayout.getChildCount() != 0) {
             for (int i = 0; i < shadesLayout.getChildCount(); i++) {
                 FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
-                final ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
-                ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+                final ColorPanelView cpv = layout.findViewById(R.id.cpv_color_panel_view);
+                ImageView iv = layout.findViewById(R.id.cpv_color_image_view);
                 cpv.setColor(colorShades[i]);
                 cpv.setTag(false);
                 iv.setImageDrawable(null);
@@ -536,7 +536,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             }
 
             final View view = View.inflate(getActivity(), layoutResId, null);
-            final ColorPanelView colorPanelView = (ColorPanelView) view.findViewById(R.id.cpv_color_panel_view);
+            final ColorPanelView colorPanelView = view.findViewById(R.id.cpv_color_panel_view);
 
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) colorPanelView.getLayoutParams();
             params.leftMargin = params.rightMargin = horizontalPadding;
@@ -564,8 +564,8 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
                     adapter.selectNone();
                     for (int i = 0; i < shadesLayout.getChildCount(); i++) {
                         FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
-                        ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
-                        ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+                        ColorPanelView cpv = layout.findViewById(R.id.cpv_color_panel_view);
+                        ImageView iv = layout.findViewById(R.id.cpv_color_image_view);
                         iv.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
                         if (cpv == v && ColorUtils.calculateLuminance(cpv.getColor()) >= 0.65
                                 || Color.alpha(cpv.getColor()) <= ALPHA_THRESHOLD) {
@@ -660,8 +660,8 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
                 // update shades:
                 for (int i = 0; i < shadesLayout.getChildCount(); i++) {
                     FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
-                    ColorPanelView cpv = (ColorPanelView) layout.findViewById(R.id.cpv_color_panel_view);
-                    ImageView iv = (ImageView) layout.findViewById(R.id.cpv_color_image_view);
+                    ColorPanelView cpv = layout.findViewById(R.id.cpv_color_panel_view);
+                    ImageView iv = layout.findViewById(R.id.cpv_color_image_view);
                     if (layout.getTag() == null) {
                         // save the original border color
                         layout.setTag(cpv.getBorderColor());
