@@ -280,11 +280,11 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
 
     View createPickerView() {
         View contentView = View.inflate(getActivity(), R.layout.cpv_dialog_color_picker, null);
-        colorPicker = (ColorPickerView) contentView.findViewById(R.id.cpv_color_picker_view);
-        ColorPanelView oldColorPanel = (ColorPanelView) contentView.findViewById(R.id.cpv_color_panel_old);
-        newColorPanel = (ColorPanelView) contentView.findViewById(R.id.cpv_color_panel_new);
-        ImageView arrowRight = (ImageView) contentView.findViewById(R.id.cpv_arrow_right);
-        hexEditText = (EditText) contentView.findViewById(R.id.cpv_hex);
+        colorPicker = contentView.findViewById(R.id.cpv_color_picker_view);
+        ColorPanelView oldColorPanel = contentView.findViewById(R.id.cpv_color_panel_old);
+        newColorPanel = contentView.findViewById(R.id.cpv_color_panel_new);
+        ImageView arrowRight = contentView.findViewById(R.id.cpv_arrow_right);
+        hexEditText = contentView.findViewById(R.id.cpv_hex);
 
         try {
             final TypedValue value = new TypedValue();
