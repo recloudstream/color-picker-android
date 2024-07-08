@@ -963,7 +963,7 @@ public class ColorPickerView extends View {
         void onColorChanged(int newColor);
     }
 
-    private class BitmapCache {
+    private static class BitmapCache {
 
         public Canvas canvas;
         public Bitmap bitmap;
