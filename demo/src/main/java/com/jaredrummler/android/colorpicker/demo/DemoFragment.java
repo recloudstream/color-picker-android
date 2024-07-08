@@ -2,7 +2,6 @@ package com.jaredrummler.android.colorpicker.demo;
 
 import android.os.Bundle;
 import android.util.Log;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.jaredrummler.android.colorpicker.ColorPreferenceCompat;
