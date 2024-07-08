@@ -52,8 +52,8 @@ public class ColorPickerView extends View {
     private final static int DEFAULT_BORDER_COLOR = 0xFF6E6E6E;
     private final static int DEFAULT_SLIDER_COLOR = 0xFFBDBDBD;
 
-    private final static int HUE_PANEL_WDITH_DP = 30;
-    private final static int ALPHA_PANEL_HEIGH_DP = 20;
+    private final static int HUE_PANEL_WIDTH_DP = 30;
+    private final static int ALPHA_PANEL_HEIGHT_DP = 20;
     private final static int PANEL_SPACING_DP = 10;
     private final static int CIRCLE_TRACKER_RADIUS_DP = 5;
     private final static int SLIDER_TRACKER_SIZE_DP = 4;
@@ -204,8 +204,8 @@ public class ColorPickerView extends View {
 
         applyThemeColors(context);
 
-        huePanelWidthPx = DrawingUtils.dpToPx(getContext(), HUE_PANEL_WDITH_DP);
-        alphaPanelHeightPx = DrawingUtils.dpToPx(getContext(), ALPHA_PANEL_HEIGH_DP);
+        huePanelWidthPx = DrawingUtils.dpToPx(getContext(), HUE_PANEL_WIDTH_DP);
+        alphaPanelHeightPx = DrawingUtils.dpToPx(getContext(), ALPHA_PANEL_HEIGHT_DP);
         panelSpacingPx = DrawingUtils.dpToPx(getContext(), PANEL_SPACING_DP);
         circleTrackerRadiusPx = DrawingUtils.dpToPx(getContext(), CIRCLE_TRACKER_RADIUS_DP);
         sliderTrackerSizePx = DrawingUtils.dpToPx(getContext(), SLIDER_TRACKER_SIZE_DP);
