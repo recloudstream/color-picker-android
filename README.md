@@ -65,7 +65,7 @@ ColorPickerDialog.newBuilder().setColor(color).show(activity);
 All the attributes above can also be applied to the `ColorPickerDialog`. The activity that shows the dialog *must* 
 implement `ColorPickerDialogListener` to get a callback when a color is selected.
 
-For further doumentation about how to use the library, check the [demo](demo) app included in this project.
+For further documentation about how to use the library, check the [demo](demo) app included in this project.
 
 ## Download
 
