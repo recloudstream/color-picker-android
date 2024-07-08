@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-  implementation deps.androidx.appCompat
-  implementation deps.androidx.preferences
+  implementation "${deps.androidx.appCompat}"
+  implementation "${deps.androidx.preferences}"
   implementation project(':library')
 }

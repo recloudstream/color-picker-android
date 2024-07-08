@@ -13,8 +13,8 @@ android {
 }
 
 dependencies {
-  implementation deps.androidx.appCompat
-  implementation deps.androidx.preferences
+  implementation "${deps.androidx.appCompat}"
+  implementation "${deps.androidx.preferences}"
 }
 
 // apply from: rootProject.file('gradle/maven-push.gradle')
