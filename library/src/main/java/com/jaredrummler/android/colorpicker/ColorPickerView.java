@@ -40,6 +40,8 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 /**
  * Displays a color picker to the user and allow them to select a color. A slider for the alpha channel is also
  * available.
@@ -264,7 +266,7 @@ public class ColorPickerView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         if (drawingRect.width() <= 0 || drawingRect.height() <= 0) {
             return;
         }
