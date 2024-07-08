@@ -9,7 +9,7 @@ import com.jaredrummler.android.colorpicker.ColorPreferenceCompat;
 
 public class DemoFragment extends PreferenceFragmentCompat {
 
-  private static final String TAG = "DemoFragment";
+  private static final String TAG = DemoFragment.class.getSimpleName();
 
   private static final String KEY_DEFAULT_COLOR = "default_color";
 
