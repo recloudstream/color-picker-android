@@ -65,16 +65,14 @@ public class ColorPickerActivity extends AppCompatActivity implements OnColorCha
   }
 
   @Override public void onClick(View v) {
-    switch (v.getId()) {
-      case R.id.okButton:
-        SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        edit.putInt("color_3", colorPickerView.getColor());
-        edit.apply();
+    int viewId = v.getId();
+    if (viewId == R.id.okButton) {
+      SharedPreferences.Editor edit = PreferenceManager.getDefaultSharedPreferences(this).edit();
+      edit.putInt("color_3", colorPickerView.getColor());
+      edit.apply();
+      finish();
+    } else if (viewId == R.id.cancelButton) {
         finish();
-        break;
-      case R.id.cancelButton:
-        finish();
-        break;
     }
   }
 }
