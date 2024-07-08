@@ -163,6 +163,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         return new Builder();
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         dialogId = getArguments().getInt(ARG_ID);
@@ -252,7 +253,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         onDialogDismissed();
     }
