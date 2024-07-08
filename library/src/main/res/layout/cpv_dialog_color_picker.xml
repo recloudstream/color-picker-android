@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="16dp"
         >
 
@@ -37,7 +38,6 @@
           android:id="@+id/cpv_arrow_right"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_gravity="center_vertical"
           android:paddingLeft="4dp"
           android:paddingRight="4dp"
           android:src="@drawable/cpv_ic_arrow_right_black_24dp"
