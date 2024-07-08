@@ -50,23 +50,24 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case R.id.menu_color_picker_dialog:
-        ColorPickerDialog.newBuilder()
-            .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
-            .setAllowPresets(false)
-            .setDialogId(DIALOG_ID)
-            .setColor(Color.BLACK)
-            .setShowAlphaSlider(true)
-            .show(this);
-        return true;
-      case R.id.menu_github:
-        try {
-          startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/ColorPicker")));
-        } catch (ActivityNotFoundException ignored) {
-        }
-        return true;
+    int itemId = item.getItemId();
+    if (itemId == R.id.menu_color_picker_dialog) {
+      ColorPickerDialog.newBuilder()
+              .setDialogType(ColorPickerDialog.TYPE_CUSTOM)
+              .setAllowPresets(false)
+              .setDialogId(DIALOG_ID)
+              .setColor(Color.BLACK)
+              .setShowAlphaSlider(true)
+              .show(this);
+      return true;
+    } else if (itemId == R.id.menu_github) {
+      try {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/jaredrummler/ColorPicker")));
+      } catch (ActivityNotFoundException ignored) {
+      }
+      return true;
     }
+
     return super.onOptionsItemSelected(item);
   }
 
