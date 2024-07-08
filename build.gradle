@@ -1,6 +1,6 @@
 buildscript {
 
-  // @formatter:off
+    // @formatter:off
   ext.buildConfig = [
       compileSdk   : 34,
       targetSdk    : 34,
@@ -19,22 +19,22 @@ buildscript {
   ]
   // @formatter:on
 
-  repositories {
-    google()
-    mavenCentral()
-  }
-  dependencies {
-    classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
+    }
 }
 
 allprojects {
-  repositories {
-    google()
-    mavenCentral()
-  }
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 tasks.register('clean', Delete) {
-  delete rootProject.layout.buildDirectory
+    delete rootProject.layout.buildDirectory
 }

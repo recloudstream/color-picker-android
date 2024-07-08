@@ -1,23 +1,23 @@
 plugins {
-  id 'com.android.library'
+    id 'com.android.library'
 }
 
 android {
-  namespace 'com.jaredrummler.android.colorpicker'
-  compileSdkVersion buildConfig.compileSdk
-  resourcePrefix "cpv_"
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-  lintOptions {
-    abortOnError false
-  }
+    namespace 'com.jaredrummler.android.colorpicker'
+    compileSdkVersion buildConfig.compileSdk
+    resourcePrefix "cpv_"
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-  implementation "${deps.androidx.appCompat}"
-  implementation "${deps.androidx.preferences}"
+    implementation "${deps.androidx.appCompat}"
+    implementation "${deps.androidx.preferences}"
 }
 
 // apply from: rootProject.file('gradle/maven-push.gradle')
