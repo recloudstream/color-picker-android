@@ -36,6 +36,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import java.util.Locale;
@@ -128,7 +129,7 @@ public class ColorPanelView extends View {
     }
   }
 
-  @Override protected void onDraw(Canvas canvas) {
+  @Override protected void onDraw(@NonNull Canvas canvas) {
     borderPaint.setColor(borderColor);
     colorPaint.setColor(color);
     if (shape == ColorShape.SQUARE) {
