@@ -79,11 +79,9 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
     @Override
     public void onColorSelected(int dialogId, int color) {
         Log.d(TAG, "onColorSelected() called with: dialogId = [" + dialogId + "], color = [" + color + "]");
-        switch (dialogId) {
-            case DIALOG_ID:
-                // We got result from the dialog that is shown when clicking on the icon in the action bar.
-                Toast.makeText(MainActivity.this, "Selected Color: #" + Integer.toHexString(color), Toast.LENGTH_SHORT).show();
-                break;
+        if (dialogId == DIALOG_ID) {
+            // We got result from the dialog that is shown when clicking on the icon in the action bar.
+            Toast.makeText(MainActivity.this, "Selected Color: #" + Integer.toHexString(color), Toast.LENGTH_SHORT).show();
         }
     }
 
