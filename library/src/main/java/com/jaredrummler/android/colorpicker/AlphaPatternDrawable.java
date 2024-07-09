@@ -79,8 +79,8 @@ class AlphaPatternDrawable extends Drawable {
     @Override
     protected void onBoundsChange(@NonNull Rect bounds) {
         super.onBoundsChange(bounds);
-        int height = bounds.height();
-        int width = bounds.width();
+        float height = bounds.height();
+        float width = bounds.width();
         numRectanglesHorizontal = (int) Math.ceil((width / rectangleSize));
         numRectanglesVertical = (int) Math.ceil(height / rectangleSize);
         generatePatternBitmap();
