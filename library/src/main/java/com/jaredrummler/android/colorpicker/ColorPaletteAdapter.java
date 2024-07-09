@@ -120,22 +120,16 @@ class ColorPaletteAdapter extends BaseAdapter {
         }
 
         private void setOnClickListener(final int position) {
-            colorPanelView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (selectedPosition != position) {
-                        selectedPosition = position;
-                        notifyDataSetChanged();
-                    }
-                    listener.onColorSelected(colors[position]);
+            colorPanelView.setOnClickListener(v -> {
+                if (selectedPosition != position) {
+                    selectedPosition = position;
+                    notifyDataSetChanged();
                 }
+                listener.onColorSelected(colors[position]);
             });
-            colorPanelView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    colorPanelView.showHint();
-                    return true;
-                }
+            colorPanelView.setOnLongClickListener(v -> {
+                colorPanelView.showHint();
+                return true;
             });
         }
 
