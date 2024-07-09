@@ -74,7 +74,7 @@ allprojects {
 }
 ```
 
-2. App dependency to module 'build.gradle'
+2. Add dependency to the module 'build.gradle'
 ```
 dependencies {
     ...
