@@ -79,7 +79,7 @@ allprojects {
 dependencies {
     ...
     ....
-    implementation 'com.github.sagishporer:ColorPicker:1.1.0'
+    implementation 'com.github.sagishporer:color-picker-android:1.3.0'
 }
 ```
 
