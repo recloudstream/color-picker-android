@@ -27,6 +27,19 @@ afterEvaluate {
             release(MavenPublication) {
                 groupId = 'com.github.sagishporer'
                 artifactId = 'color-picker-android'
+
+                pom {
+                    name = 'Color Picker'
+                    description = 'A highly customizable color picker for Android'
+                    url = 'https://github.com/sagishporer/color-picker-android'
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
             }
         }
     }
