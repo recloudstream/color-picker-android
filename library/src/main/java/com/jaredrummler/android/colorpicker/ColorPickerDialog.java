@@ -309,13 +309,10 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             hexEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
         }
 
-        newColorPanel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (newColorPanel.getColor() == color) {
-                    onColorSelected(color);
-                    dismiss();
-                }
+        newColorPanel.setOnClickListener(v -> {
+            if (newColorPanel.getColor() == color) {
+                onColorSelected(color);
+                dismiss();
             }
         });
 
@@ -323,13 +320,10 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         colorPicker.setOnColorChangedListener(this);
         hexEditText.addTextChangedListener(this);
 
-        hexEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(hexEditText, InputMethodManager.SHOW_IMPLICIT);
-                }
+        hexEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(hexEditText, InputMethodManager.SHOW_IMPLICIT);
             }
         });
 
@@ -456,19 +450,16 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             contentView.findViewById(R.id.shades_divider).setVisibility(View.GONE);
         }
 
-        adapter = new ColorPaletteAdapter(new ColorPaletteAdapter.OnColorSelectedListener() {
-            @Override
-            public void onColorSelected(int newColor) {
-                if (color == newColor) {
-                    // Double tab selects the color
-                    ColorPickerDialog.this.onColorSelected(color);
-                    dismiss();
-                    return;
-                }
-                color = newColor;
-                if (showColorShades) {
-                    createColorShades(color);
-                }
+        adapter = new ColorPaletteAdapter(newColor -> {
+            if (color == newColor) {
+                // Double tab selects the color
+                ColorPickerDialog.this.onColorSelected(color);
+                dismiss();
+                return;
+            }
+            color = newColor;
+            if (showColorShades) {
+                createColorShades(color);
             }
         }, presets, getSelectedItemPosition(), colorShape);
 
@@ -546,45 +537,36 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
             colorPanelView.setColor(colorShade);
             shadesLayout.addView(view);
 
-            colorPanelView.post(new Runnable() {
-                @Override
-                public void run() {
-                    // The color is black when rotating the dialog. This is a dirty fix. WTF!?
-                    colorPanelView.setColor(colorShade);
-                }
+            colorPanelView.post(() -> {
+                // The color is black when rotating the dialog. This is a dirty fix. WTF!?
+                colorPanelView.setColor(colorShade);
             });
 
-            colorPanelView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
-                        onColorSelected(ColorPickerDialog.this.color);
-                        dismiss();
-                        return; // already selected
+            colorPanelView.setOnClickListener(v -> {
+                if (v.getTag() instanceof Boolean && (Boolean) v.getTag()) {
+                    onColorSelected(ColorPickerDialog.this.color);
+                    dismiss();
+                    return; // already selected
+                }
+                ColorPickerDialog.this.color = colorPanelView.getColor();
+                adapter.selectNone();
+                for (int i = 0; i < shadesLayout.getChildCount(); i++) {
+                    FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
+                    ColorPanelView cpv = layout.findViewById(R.id.cpv_color_panel_view);
+                    ImageView iv = layout.findViewById(R.id.cpv_color_image_view);
+                    iv.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
+                    if (cpv == v && ColorUtils.calculateLuminance(cpv.getColor()) >= 0.65
+                            || Color.alpha(cpv.getColor()) <= ALPHA_THRESHOLD) {
+                        iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
+                    } else {
+                        iv.setColorFilter(null);
                     }
-                    ColorPickerDialog.this.color = colorPanelView.getColor();
-                    adapter.selectNone();
-                    for (int i = 0; i < shadesLayout.getChildCount(); i++) {
-                        FrameLayout layout = (FrameLayout) shadesLayout.getChildAt(i);
-                        ColorPanelView cpv = layout.findViewById(R.id.cpv_color_panel_view);
-                        ImageView iv = layout.findViewById(R.id.cpv_color_image_view);
-                        iv.setImageResource(cpv == v ? R.drawable.cpv_preset_checked : 0);
-                        if (cpv == v && ColorUtils.calculateLuminance(cpv.getColor()) >= 0.65
-                                || Color.alpha(cpv.getColor()) <= ALPHA_THRESHOLD) {
-                            iv.setColorFilter(Color.BLACK, PorterDuff.Mode.SRC_IN);
-                        } else {
-                            iv.setColorFilter(null);
-                        }
-                        cpv.setTag(cpv == v);
-                    }
+                    cpv.setTag(cpv == v);
                 }
             });
-            colorPanelView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    colorPanelView.showHint();
-                    return true;
-                }
+            colorPanelView.setOnLongClickListener(v -> {
+                colorPanelView.showHint();
+                return true;
             });
         }
     }
