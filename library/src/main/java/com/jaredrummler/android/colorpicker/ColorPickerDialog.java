@@ -234,21 +234,18 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         // Do not dismiss the dialog when clicking the neutral button.
         Button neutralButton = dialog.getButton(AlertDialog.BUTTON_NEUTRAL);
         if (neutralButton != null) {
-            neutralButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    rootView.removeAllViews();
-                    switch (dialogType) {
-                        case TYPE_CUSTOM:
-                            dialogType = TYPE_PRESETS;
-                            ((Button) v).setText(customButtonStringRes != 0 ? customButtonStringRes : R.string.cpv_custom);
-                            rootView.addView(createPresetsView());
-                            break;
-                        case TYPE_PRESETS:
-                            dialogType = TYPE_CUSTOM;
-                            ((Button) v).setText(presetsButtonStringRes != 0 ? presetsButtonStringRes : R.string.cpv_presets);
-                            rootView.addView(createPickerView());
-                    }
+            neutralButton.setOnClickListener(v -> {
+                rootView.removeAllViews();
+                switch (dialogType) {
+                    case TYPE_CUSTOM:
+                        dialogType = TYPE_PRESETS;
+                        ((Button) v).setText(customButtonStringRes != 0 ? customButtonStringRes : R.string.cpv_custom);
+                        rootView.addView(createPresetsView());
+                        break;
+                    case TYPE_PRESETS:
+                        dialogType = TYPE_CUSTOM;
+                        ((Button) v).setText(presetsButtonStringRes != 0 ? presetsButtonStringRes : R.string.cpv_presets);
+                        rootView.addView(createPickerView());
                 }
             });
         }
