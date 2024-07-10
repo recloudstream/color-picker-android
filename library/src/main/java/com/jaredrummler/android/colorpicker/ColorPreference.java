@@ -36,6 +36,7 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     private static final int SIZE_LARGE = 1;
 
     private OnShowDialogListener onShowDialogListener;
+    @ColorInt
     private int color = Color.BLACK;
     private boolean showDialog;
     @ColorPickerDialog.DialogType
@@ -146,6 +147,11 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
             color = (Integer) defaultValue;
             persistInt(color);
         }
+    }
+
+    @ColorInt
+    public int getValue() {
+        return this.color;
     }
 
     @Override
