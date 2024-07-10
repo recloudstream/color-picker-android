@@ -25,6 +25,10 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar"){
+                    builtBy assembleRelease
+                }
+
                 groupId = 'com.github.sagishporer'
                 artifactId = 'color-picker-android'
 
