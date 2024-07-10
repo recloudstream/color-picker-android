@@ -31,7 +31,7 @@ import androidx.annotation.NonNull;
  * This drawable will draw a simple white and gray chessboard pattern.
  * It's the pattern you will often see as a background behind a partly transparent image in many applications.
  */
-class AlphaPatternDrawable extends Drawable {
+public class AlphaPatternDrawable extends Drawable {
 
     private final int rectangleSize;
 
