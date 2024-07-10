@@ -25,6 +25,7 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 /**
@@ -49,10 +50,14 @@ public class AlphaPatternDrawable extends Drawable {
      */
     private Bitmap bitmap;
 
-    AlphaPatternDrawable(int rectangleSize) {
+    public AlphaPatternDrawable(int rectangleSize) {
+        this(rectangleSize, 0xFFFFFFFF, 0xFFCBCBCB);
+    }
+
+    public AlphaPatternDrawable(int rectangleSize, @ColorInt int color1, @ColorInt int color2) {
         this.rectangleSize = rectangleSize;
-        paintWhite.setColor(0xFFFFFFFF);
-        paintGray.setColor(0xFFCBCBCB);
+        paintWhite.setColor(color1);
+        paintGray.setColor(color2);
     }
 
     @Override
