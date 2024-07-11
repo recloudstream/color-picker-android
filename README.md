@@ -2,7 +2,7 @@
 
 <img src="https://github.com/jaredrummler/ColorPicker/blob/master/demo/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" align="left" hspace="10" vspace="10"></a>
 
-Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets.
+Yet another open source color picker for Android. So, why should you use this color picker? It is highly customizable and easy to use. You can simply add the `ColorPickerPreference` to your preferences and a beautiful color picker dialog will be displayed without additional code. The color picker supports alpha and allows you to set your own presets.
 
 The original ColorPickerView was written by [Daniel Nilsson](https://github.com/danielnilsson9/color-picker-view).
 
@@ -13,7 +13,7 @@ The original ColorPickerView was written by [Daniel Nilsson](https://github.com/
 
 ## Usage
 
-Add the `ColorPreference` to your preference XML:
+Add the `ColorPickerPreference` to your preference XML:
 
 ```xml
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +21,7 @@ Add the `ColorPreference` to your preference XML:
 
   <PreferenceCategory>
 
-    <com.jaredrummler.android.colorpicker.ColorPreference
+    <com.jaredrummler.android.colorpicker.ColorPickerPreference
         android:defaultValue="@color/color_default"
         android:key="default_color"
         android:summary="@string/color_default_summary"
@@ -34,9 +34,7 @@ Add the `ColorPreference` to your preference XML:
 </PreferenceScreen>
 ```
 
-Note: Using AndroidX's `PreferenceFragmentCompat`? Then use `com.jaredrummler.android.colorpicker.ColorPreferenceCompat`
-
-You can add attributes to customize the `ColorPreference`:
+You can add attributes to customize the `ColorPickerPreference`:
 
 | name                | type      | documentation                                                                         |
 |---------------------|-----------|---------------------------------------------------------------------------------------|
@@ -48,9 +46,9 @@ You can add attributes to customize the `ColorPreference`:
 | cpv_showColorShades | boolean   | true to show different shades of the selected color                                   |
 | cpv_allowPresets    | boolean   | true to add a button to toggle to the custom color picker                             |
 | cpv_allowCustom     | boolean   | true to add a button to toggle to the presets color picker                            |
-| cpv_showDialog      | boolean   | true to let the ColorPreference handle showing the dialog                             |
+| cpv_showDialog      | boolean   | true to let the ColorPickerPreference handle showing the dialog                       |
 
-You can also show a `ColorPickerDialog` without using the `ColorPreference`:
+You can also show a `ColorPickerDialog` without using the `ColorPickerPreference`:
 
 ```java
 ColorPickerDialog.newBuilder().setColor(color).show(activity);

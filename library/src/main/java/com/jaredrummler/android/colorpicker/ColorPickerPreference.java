@@ -1,36 +1,21 @@
-/*
- * Copyright (C) 2017 Jared Rummler
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.jaredrummler.android.colorpicker;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.preference.Preference;
 import android.util.AttributeSet;
-import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 /**
  * A Preference to select a color
  */
-public class ColorPreference extends Preference implements ColorPickerDialogListener {
+public class ColorPickerPreference extends Preference implements ColorPickerDialogListener {
 
     private static final int SIZE_NORMAL = 0;
     private static final int SIZE_LARGE = 1;
@@ -50,12 +35,12 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
     private int[] presets;
     private int dialogTitle;
 
-    public ColorPreference(Context context, AttributeSet attrs) {
+    public ColorPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public ColorPreference(Context context, AttributeSet attrs, int defStyle) {
+    public ColorPickerPreference(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
     }
@@ -107,22 +92,32 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
                     .setColor(color)
                     .create();
             dialog.setColorPickerDialogListener(this);
-            FragmentActivity activity = (FragmentActivity) getContext();
-            activity.getSupportFragmentManager()
+            getActivity().getSupportFragmentManager()
                     .beginTransaction()
                     .add(dialog, getFragmentTag())
                     .commitAllowingStateLoss();
         }
     }
 
-    @Override
-    protected void onAttachedToActivity() {
-        super.onAttachedToActivity();
+    public FragmentActivity getActivity() {
+        Context context = getContext();
+        if (context instanceof FragmentActivity) {
+            return (FragmentActivity) context;
+        } else if (context instanceof ContextWrapper) {
+            Context baseContext = ((ContextWrapper) context).getBaseContext();
+            if (baseContext instanceof FragmentActivity) {
+                return (FragmentActivity) baseContext;
+            }
+        }
+        throw new IllegalStateException("Error getting activity from context");
+    }
 
+    @Override
+    public void onAttached() {
+        super.onAttached();
         if (showDialog) {
-            FragmentActivity activity = (FragmentActivity) getContext();
             ColorPickerDialog fragment =
-                    (ColorPickerDialog) activity.getSupportFragmentManager().findFragmentByTag(getFragmentTag());
+                    (ColorPickerDialog) getActivity().getSupportFragmentManager().findFragmentByTag(getFragmentTag());
             if (fragment != null) {
                 // re-bind preference to fragment
                 fragment.setColorPickerDialogListener(this);
@@ -130,28 +125,29 @@ public class ColorPreference extends Preference implements ColorPickerDialogList
         }
     }
 
+    @ColorInt
+    public int getValue() {
+        return this.color;
+    }
+
     @Override
-    protected void onBindView(View view) {
-        super.onBindView(view);
-        ColorPanelView preview = (ColorPanelView) view.findViewById(R.id.cpv_preference_preview_color_panel);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        ColorPanelView preview = (ColorPanelView) holder.itemView.findViewById(R.id.cpv_preference_preview_color_panel);
         if (preview != null) {
             preview.setColor(color);
         }
     }
 
     @Override
-    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-        if (restorePersistedValue) {
-            color = getPersistedInt(0xFF000000);
-        } else {
+    protected void onSetInitialValue(Object defaultValue) {
+        super.onSetInitialValue(defaultValue);
+        if (defaultValue instanceof Integer) {
             color = (Integer) defaultValue;
             persistInt(color);
+        } else {
+            color = getPersistedInt(0xFF000000);
         }
-    }
-
-    @ColorInt
-    public int getValue() {
-        return this.color;
     }
 
     @Override

@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.preference.PreferenceFragmentCompat;
 
-import com.jaredrummler.android.colorpicker.ColorPreferenceCompat;
+import com.jaredrummler.android.colorpicker.ColorPickerPreference;
 
 public class DemoFragment extends PreferenceFragmentCompat {
 
@@ -18,7 +18,7 @@ public class DemoFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.main, rootKey);
 
         // Example showing how we can get the new color when it is changed:
-        ColorPreferenceCompat colorPreference = findPreference(KEY_DEFAULT_COLOR);
+        ColorPickerPreference colorPreference = findPreference(KEY_DEFAULT_COLOR);
         assert colorPreference != null;
         colorPreference.setOnPreferenceChangeListener((preference, newValue) -> {
             if (KEY_DEFAULT_COLOR.equals(preference.getKey())) {
