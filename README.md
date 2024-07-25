@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/sagishporer/color-picker-android.svg)](https://jitpack.io/#sagishporer/color-picker-android)</br>
+
 # Color Picker
 
 <img src="https://github.com/jaredrummler/ColorPicker/blob/master/demo/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true" align="left" hspace="10" vspace="10"></a>
@@ -77,7 +79,7 @@ allprojects {
 dependencies {
     ...
     ....
-    implementation 'com.github.sagishporer:color-picker-android:1.3.7'
+    implementation 'com.github.sagishporer:color-picker-android:1.3.8'
 }
 ```
 
