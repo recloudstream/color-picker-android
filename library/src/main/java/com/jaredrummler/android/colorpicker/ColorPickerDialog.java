@@ -23,6 +23,8 @@ import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -49,6 +51,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
@@ -277,13 +280,32 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
     }
 
     // region Custom Picker
+    private static boolean isRTL(@NonNull final Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            return context.getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        else {
+            Locale locale = context.getResources().getConfiguration().locale;
+            final String RTL_SCRIPTS = "ar|he|iw|fa|ur";
+            return RTL_SCRIPTS.contains(locale.getLanguage());
+        }
+    }
 
     View createPickerView() {
         View contentView = View.inflate(getActivity(), R.layout.cpv_dialog_color_picker, null);
         colorPicker = contentView.findViewById(R.id.cpv_color_picker_view);
         ColorPanelView oldColorPanel = contentView.findViewById(R.id.cpv_color_panel_old);
         newColorPanel = contentView.findViewById(R.id.cpv_color_panel_new);
+
+        // Set arrow according to the view direction
         ImageView arrowRight = contentView.findViewById(R.id.cpv_arrow_right);
+        boolean isRTL = isRTL(contentView.getContext());
+
+        Drawable arrowDirectionDrawalbe =
+                ContextCompat.getDrawable(contentView.getContext(),
+                        isRTL? R.drawable.cpv_ic_arrow_left_black_24dp:
+                               R.drawable.cpv_ic_arrow_right_black_24dp);
+        arrowRight.setImageDrawable(arrowDirectionDrawalbe);
+
         hexEditText = contentView.findViewById(R.id.cpv_hex);
 
         try {
