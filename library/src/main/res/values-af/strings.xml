@@ -15,7 +15,7 @@
 -->
 <resources>
   <!-- Default title for color picker dialog [CHAR LIMIT=30] -->
-  <string name="cpv_default_title">Kies &amp;#39;n kleur</string>
+  <string name="cpv_default_title">Kies \'n kleur</string>
   <string name="cpv_presets">Voorinstellings</string>
   <string name="cpv_custom">Pasgemaak</string>
   <string name="cpv_select">Kies</string>
