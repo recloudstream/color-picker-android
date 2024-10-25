@@ -17,9 +17,9 @@ android {
             minifyEnabled false
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
+    lint {
         abortOnError false
+        checkReleaseBuilds false
     }
 }
 
