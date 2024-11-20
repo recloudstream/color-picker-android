@@ -616,19 +616,20 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         }
     }
 
-    private int shadeColor(@ColorInt int color, double percent) {
-        String hex = String.format("#%06X", (0xFFFFFF & color));
-        long f = Long.parseLong(hex.substring(1), 16);
-        double t = percent < 0 ? 0 : 255;
-        double p = percent < 0 ? percent * -1 : percent;
-        long R = f >> 16;
-        long G = f >> 8 & 0x00FF;
-        long B = f & 0x0000FF;
+    private static int shadeColor(@ColorInt int color, double percent) {
         int alpha = Color.alpha(color);
-        int red = (int) (Math.round((t - R) * p) + R);
-        int green = (int) (Math.round((t - G) * p) + G);
-        int blue = (int) (Math.round((t - B) * p) + B);
-        return Color.argb(alpha, red, green, blue);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+
+        double t = percent < 0 ? 0 : 255;
+        double p = Math.abs(percent);
+
+        int shadedRed = (int) (Math.round((t - red) * p) + red);
+        int shadedGreen = (int) (Math.round((t - green) * p) + green);
+        int shadedBlue = (int) (Math.round((t - blue) * p) + blue);
+
+        return Color.argb(alpha, shadedRed, shadedGreen, shadedBlue);
     }
 
     private int[] getColorShades(@ColorInt int color) {
