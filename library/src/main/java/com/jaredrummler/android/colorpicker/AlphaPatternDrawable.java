@@ -28,6 +28,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 
 /**
@@ -37,11 +38,11 @@ import androidx.annotation.NonNull;
 public class AlphaPatternDrawable extends Drawable {
     private final Paint patternPaint;
 
-    public AlphaPatternDrawable(int rectangleSize) {
+    public AlphaPatternDrawable(@IntRange(from = 1) int rectangleSize) {
         this(rectangleSize, 0xFFFFFFFF, 0xFFCBCBCB);
     }
 
-    public AlphaPatternDrawable(int rectangleSize, @ColorInt int color1, @ColorInt int color2) {
+    public AlphaPatternDrawable(@IntRange(from = 1) int rectangleSize, @ColorInt int color1, @ColorInt int color2) {
         // Create a small bitmap to define the checkerboard pattern
         Bitmap patternBitmap = Bitmap.createBitmap(rectangleSize * 2, rectangleSize * 2, Config.ARGB_8888);
         Canvas patternCanvas = new Canvas(patternBitmap);
