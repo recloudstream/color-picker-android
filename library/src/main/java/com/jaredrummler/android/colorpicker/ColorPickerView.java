@@ -387,8 +387,8 @@ public class ColorPickerView extends View {
         RectF r = new RectF();
         r.left = rect.left - sliderTrackerOffsetPx;
         r.right = rect.right + sliderTrackerOffsetPx;
-        r.top = p.y - (sliderTrackerSizePx / 2);
-        r.bottom = p.y + (sliderTrackerSizePx / 2);
+        r.top = p.y - (sliderTrackerSizePx / 2f);
+        r.bottom = p.y + (sliderTrackerSizePx / 2f);
 
         canvas.drawRoundRect(r, 2, 2, hueAlphaTrackerPaint);
     }
@@ -430,8 +430,8 @@ public class ColorPickerView extends View {
         Point p = alphaToPoint(alpha);
 
         RectF r = new RectF();
-        r.left = p.x - (sliderTrackerSizePx / 2);
-        r.right = p.x + (sliderTrackerSizePx / 2);
+        r.left = p.x - (sliderTrackerSizePx / 2f);
+        r.right = p.x + (sliderTrackerSizePx / 2f);
         r.top = rect.top - sliderTrackerOffsetPx;
         r.bottom = rect.bottom + sliderTrackerOffsetPx;
 
