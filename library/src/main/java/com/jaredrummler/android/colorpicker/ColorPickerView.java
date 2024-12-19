@@ -422,7 +422,7 @@ public class ColorPickerView extends View {
 
         canvas.drawRect(rect, alphaPaint);
 
-        if (alphaSliderText != null && !alphaSliderText.equals("")) {
+        if (alphaSliderText != null && !alphaSliderText.isEmpty()) {
             canvas.drawText(alphaSliderText, rect.centerX(), rect.centerY() + DrawingUtils.dpToPx(getContext(), 4),
                     alphaTextPaint);
         }
