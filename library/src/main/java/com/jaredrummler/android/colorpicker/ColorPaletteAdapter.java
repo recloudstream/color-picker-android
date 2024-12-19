@@ -31,7 +31,7 @@ class ColorPaletteAdapter extends BaseAdapter {
     /*package*/ final OnColorSelectedListener listener;
     /*package*/ final int[] colors;
     /*package*/ int selectedPosition;
-    /*package*/ int colorShape;
+    /*package*/ final int colorShape;
 
     ColorPaletteAdapter(OnColorSelectedListener listener, int[] colors, int selectedPosition,
                         @ColorShape int colorShape) {
@@ -81,10 +81,10 @@ class ColorPaletteAdapter extends BaseAdapter {
 
     private final class ViewHolder {
 
-        View view;
-        ColorPanelView colorPanelView;
-        ImageView imageView;
-        int originalBorderColor;
+        final View view;
+        final ColorPanelView colorPanelView;
+        final ImageView imageView;
+        final int originalBorderColor;
 
         ViewHolder(Context context) {
             int layoutResId;
