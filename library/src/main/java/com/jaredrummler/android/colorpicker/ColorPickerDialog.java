@@ -400,7 +400,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         if (colorString.startsWith("#")) {
             colorString = colorString.substring(1);
         }
-        if (colorString.length() == 0) {
+        if (colorString.isEmpty()) {
             r = 0;
             a = 255;
             g = 0;
