@@ -600,7 +600,7 @@ public class ColorPickerDialog extends DialogFragment implements ColorPickerView
         if (activity instanceof ColorPickerDialogListener) {
             ((ColorPickerDialogListener) activity).onColorSelected(dialogId, color);
         } else {
-            throw new IllegalStateException("The activity must implement ColorPickerDialogListener");
+            Log.e(TAG, "The activity must implement ColorPickerDialogListener");
         }
     }
 
