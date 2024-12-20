@@ -73,8 +73,7 @@ import java.util.Locale;
  * </pre>
  */
 public class ColorPickerDialog extends DialogFragment implements ColorPickerView.OnColorChangedListener, TextWatcher {
-
-    private static final String TAG = "ColorPickerDialog";
+    private static final String TAG = ColorPickerDialog.class.getSimpleName();
 
     public static final int TYPE_CUSTOM = 0;
     public static final int TYPE_PRESETS = 1;

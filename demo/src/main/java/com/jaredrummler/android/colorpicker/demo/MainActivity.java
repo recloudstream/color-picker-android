@@ -33,7 +33,7 @@ import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 
 public class MainActivity extends AppCompatActivity implements ColorPickerDialogListener {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     // Give your color picker dialog unique IDs if you have multiple dialogs.
     private static final int DIALOG_ID = 0;
