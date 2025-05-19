@@ -37,6 +37,7 @@ import androidx.annotation.NonNull;
  */
 public class AlphaPatternDrawable extends Drawable {
     private final Paint patternPaint;
+    private Rect bounds;
 
     public AlphaPatternDrawable(@IntRange(from = 1) int rectangleSize) {
         this(rectangleSize, 0xFFFFFFFF, 0xFFCBCBCB);
@@ -75,7 +76,10 @@ public class AlphaPatternDrawable extends Drawable {
 
     @Override
     public void draw(@NonNull Canvas canvas) {
-        canvas.drawPaint(patternPaint);
+        if (bounds == null)
+            canvas.drawPaint(patternPaint);
+        else
+            canvas.drawRect(bounds, patternPaint);
     }
 
     @Override
@@ -91,5 +95,12 @@ public class AlphaPatternDrawable extends Drawable {
     @Override
     public void setColorFilter(ColorFilter cf) {
         throw new UnsupportedOperationException("ColorFilter is not supported by this drawable.");
+    }
+
+    @Override
+    protected void onBoundsChange(@NonNull Rect bounds) {
+        super.onBoundsChange(bounds);
+
+        this.bounds = new Rect(bounds);
     }
 }
