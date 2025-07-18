@@ -7,6 +7,7 @@
       <enum name="circle" value="1"/>
     </attr>
     <attr format="color|reference" name="cpv_borderColor"/>
+    <attr format="color|reference" name="cpv_focusBorderColor"/>
   </declare-styleable>
 
   <declare-styleable name="ColorPickerView" parent="ColorPanelView">
@@ -14,6 +15,7 @@
     <attr format="string|reference" name="cpv_alphaChannelText"/>
     <attr format="color|reference" name="cpv_sliderColor"/>
     <attr name="cpv_borderColor"/>
+    <attr name="cpv_focusBorderColor"/>
   </declare-styleable>
 
   <declare-styleable name="ColorPreference" parent="ColorPickerDialog">

@@ -38,6 +38,7 @@ import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 
@@ -53,6 +54,7 @@ public class ColorPanelView extends View {
 
     private Drawable alphaPattern;
     private Paint borderPaint;
+    private Paint focusPaint;
     private Paint colorPaint;
     private Paint alphaPaint;
     private Paint originalPaint;
@@ -63,7 +65,9 @@ public class ColorPanelView extends View {
 
     /* The width in pixels of the border surrounding the color panel. */
     private int borderWidthPx;
+    private int focusBorderWidthPx;
     private int borderColor = DEFAULT_BORDER_COLOR;
+    private int focusColor = DEFAULT_BORDER_COLOR;
     private int color = Color.BLACK;
     private int shape;
 
@@ -98,6 +102,12 @@ public class ColorPanelView extends View {
         super.onRestoreInstanceState(state);
     }
 
+    @Override
+    protected void onFocusChanged(boolean gainFocus, int direction, @Nullable Rect previouslyFocusedRect) {
+        super.onFocusChanged(gainFocus, direction, previouslyFocusedRect);
+        invalidate();
+    }
+
     private void init(Context context, AttributeSet attrs) {
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ColorPanelView);
         shape = a.getInt(R.styleable.ColorPanelView_cpv_colorShape, ColorShape.CIRCLE);
@@ -106,7 +116,6 @@ public class ColorPanelView extends View {
             throw new IllegalStateException("Color preview is only available in circle mode");
         }
         borderColor = a.getColor(R.styleable.ColorPanelView_cpv_borderColor, DEFAULT_BORDER_COLOR);
-        a.recycle();
         if (borderColor == DEFAULT_BORDER_COLOR) {
             // If no specific border color has been set we take the default secondary text color as border/slider color.
             // Thus it will adopt to theme changes automatically.
@@ -116,9 +125,25 @@ public class ColorPanelView extends View {
             borderColor = typedArray.getColor(0, borderColor);
             typedArray.recycle();
         }
+
+        focusColor = a.getColor(R.styleable.ColorPanelView_cpv_focusBorderColor, DEFAULT_BORDER_COLOR);
+        if (focusColor == DEFAULT_BORDER_COLOR) {
+            // If no specific border color has been set we take the default secondary text color as border/slider color.
+            // Thus it will adopt to theme changes automatically.
+            final TypedValue value = new TypedValue();
+            TypedArray typedArray =
+                    context.obtainStyledAttributes(value.data, new int[]{R.attr.cpv_focusBorderColor});
+            focusColor = typedArray.getColor(0, focusColor);
+            typedArray.recycle();
+        }
+
+        a.recycle();
         borderWidthPx = DrawingUtils.dpToPx(context, 1);
+        focusBorderWidthPx = DrawingUtils.dpToPx(context, 2);
         borderPaint = new Paint();
         borderPaint.setAntiAlias(true);
+        focusPaint = new Paint();
+        focusPaint.setAntiAlias(true);
         colorPaint = new Paint();
         colorPaint.setAntiAlias(true);
         if (showOldColor) {
@@ -136,8 +161,10 @@ public class ColorPanelView extends View {
     @Override
     protected void onDraw(@NonNull Canvas canvas) {
         borderPaint.setColor(borderColor);
+        focusPaint.setColor(focusColor);
         colorPaint.setColor(color);
         if (shape == ColorShape.SQUARE) {
+            canvas.drawRect(drawingRect, borderPaint);
             if (borderWidthPx > 0) {
                 canvas.drawRect(drawingRect, borderPaint);
             }
@@ -147,17 +174,23 @@ public class ColorPanelView extends View {
             canvas.drawRect(colorRect, colorPaint);
         } else if (shape == ColorShape.CIRCLE) {
             final int outerRadius = getMeasuredWidth() / 2;
+            final boolean isFocused = isFocused();
+            final int innerRadius = isFocused ? (outerRadius - borderWidthPx - focusBorderWidthPx) : (outerRadius - borderWidthPx);
+            final int borderRadius = isFocused ? (outerRadius - focusBorderWidthPx) : outerRadius;
+            if (isFocused && focusBorderWidthPx > 0) {
+                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, outerRadius, focusPaint);
+            }
             if (borderWidthPx > 0) {
-                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, outerRadius, borderPaint);
+                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, borderRadius, borderPaint);
             }
             if (Color.alpha(color) < 255) {
-                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, outerRadius - borderWidthPx, alphaPaint);
+                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, innerRadius, alphaPaint);
             }
             if (showOldColor) {
                 canvas.drawArc(centerRect, 90, 180, true, originalPaint);
                 canvas.drawArc(centerRect, 270, 180, true, colorPaint);
             } else {
-                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, outerRadius - borderWidthPx, colorPaint);
+                canvas.drawCircle(getMeasuredWidth() / 2f, getMeasuredHeight() / 2f, innerRadius, colorPaint);
             }
         }
     }
