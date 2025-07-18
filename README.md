@@ -1,4 +1,4 @@
-[![](https://jitpack.io/v/sagishporer/color-picker-android.svg)](https://jitpack.io/#sagishporer/color-picker-android)</br>
+[![](https://jitpack.io/v/recloudstream/color-picker-android.svg)](https://jitpack.io/#recloudstream/color-picker-android)</br>
 
 # Color Picker
 
@@ -79,7 +79,7 @@ allprojects {
 dependencies {
     ...
     ....
-    implementation 'com.github.sagishporer:color-picker-android:1.3.8'
+    implementation 'com.github.recloudstream:color-picker-android:1.4.2'
 }
 ```
 
